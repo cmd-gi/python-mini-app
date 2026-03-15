@@ -72,18 +72,30 @@ A professional, modern full-stack web application providing multiple creator uti
 
 ## Deployment Guide
 
-### Backend (FastAPI)
-- **Recommended Platform**: Google Cloud Run, AWS App Runner, or Railway.
-- **Requirements**: At least **2GB RAM** (4GB recommended) to handle AI models (`rembg`, `EasyOCR`).
-- **Environment Variables**:
-  - `FIREBASE_SERVICE_ACCOUNT`: Path to your Firebase service account JSON.
-  - `FIREBASE_STORAGE_BUCKET`: Your Firebase storage bucket URL.
-- **Docker**: A Dockerfile is recommended for consistent environment (FFmpeg and Python dependencies).
+### Backend (FastAPI) - Deploy to Railway
+1. **Login to Railway**: Go to [railway.app](https://railway.app).
+2. **New Project**: Click "New Project" and select "Deploy from GitHub repo".
+3. **Choose Repo**: Select your `creator-toolkit` repository.
+4. **Configuration**: Railway will detect the `Dockerfile` in the root.
+5. **Environment Variables**: Go to the "Variables" tab and add:
+   - `PORT`: `8080`
+   - `FIREBASE_STORAGE_BUCKET`: `your-app.appspot.com`
+   - `FIREBASE_SERVICE_ACCOUNT`: (Paste the content of your JSON key or upload it)
+6. **Deploy**: Railway will build the image and start the server.
 
-### Frontend (React)
-- **Recommended Platform**: Vercel, Netlify, or Firebase Hosting.
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
+> **Note**: This backend requires at least **2GB RAM** to run AI models. Ensure your Railway plan supports this.
+
+### Frontend (React) - Deploy to Firebase Hosting
+1. **Install Firebase CLI**: `npm install -g firebase-tools`
+2. **Login**: `firebase login`
+3. **Init**: Run `firebase init` in the root directory.
+   - Select **Hosting**.
+   - Select your Firebase project.
+   - Public directory: `frontend/dist`
+   - Configure as single-page app: **Yes**.
+4. **Update API URL**: In `frontend/src/services/api.js`, change `API_BASE_URL` to your Railway URL.
+5. **Build**: `cd frontend && npm run build`
+6. **Deploy**: `firebase deploy --only hosting`
 
 ### Cloud Infrastructure
 - **Authentication**: Firebase Auth (Google & Email).
