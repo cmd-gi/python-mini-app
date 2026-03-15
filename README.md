@@ -69,3 +69,24 @@ A professional, modern full-stack web application providing multiple creator uti
 - Guest users have their data stored temporarily.
 - A background task cleans up expired guest files every 24 hours.
 - Users can log in via Firebase for persistent history.
+
+## Deployment Guide
+
+### Backend (FastAPI)
+- **Recommended Platform**: Google Cloud Run, AWS App Runner, or Railway.
+- **Requirements**: At least **2GB RAM** (4GB recommended) to handle AI models (`rembg`, `EasyOCR`).
+- **Environment Variables**:
+  - `FIREBASE_SERVICE_ACCOUNT`: Path to your Firebase service account JSON.
+  - `FIREBASE_STORAGE_BUCKET`: Your Firebase storage bucket URL.
+- **Docker**: A Dockerfile is recommended for consistent environment (FFmpeg and Python dependencies).
+
+### Frontend (React)
+- **Recommended Platform**: Vercel, Netlify, or Firebase Hosting.
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+
+### Cloud Infrastructure
+- **Authentication**: Firebase Auth (Google & Email).
+- **Database**: Firebase Firestore.
+- **Storage**: Firebase Storage with lifecycle rules to auto-delete guest files.
+- **Media Processing**: Handled on the server-side via Python libraries.
