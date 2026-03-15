@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+firebase-admin
+rembg
+yt-dlp
+Pillow
+moviepy
+python-multipart
+pydantic
+pytest
+httpx
+easyocr
+static-ffmpeg
+python-dotenv
